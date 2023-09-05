@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 import seaborn as sns
 sns.set(style="white", color_codes=True)
-iris = pd.read_csv("/content/drive/MyDrive/datasets_for_ML/Iris.csv")
+iris = pd.read_csv("Iris.csv")
 iris.head()
 iris["Species"].value_counts()
 # sns.FacetGrid(iris, hue="Species",height=6).map(plt.scatter, "PetalLengthCm", "SepalWidthCm").add_legend()
