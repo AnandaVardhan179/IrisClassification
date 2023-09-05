@@ -1,0 +1,30 @@
+import warnings
+warnings.filterwarnings('ignore')
+
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+import seaborn as sns
+sns.set(style="white", color_codes=True)
+iris = pd.read_csv("/content/drive/MyDrive/datasets_for_ML/Iris.csv")
+iris.head()
+iris["Species"].value_counts()
+# sns.FacetGrid(iris, hue="Species",height=6).map(plt.scatter, "PetalLengthCm", "SepalWidthCm").add_legend()
+flower_mapping = {'Iris-setosa': 0,'Iris-versicolor': 1,'Iris-virginica':2}
+iris["Species"] = iris["Species"].map(flower_mapping)
+iris.head()
+X=iris[['SepalLengthCm','SepalWidthCm','PetalLengthCm','PetalWidthCm']].values
+y=iris[['Species']].values 
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
+model.fit(X, y)
+model.score(X,y)
+expected = y
+predicted = model.predict(X)
+predicted
+from sklearn import metrics
+print(metrics.classification_report(expected, predicted))
+print(metrics.confusion_matrix(expected, predicted))
+model = LogisticRegression(C=20,penalty='l2' )
+model.fit(X,y)
+model.score(X,y)
